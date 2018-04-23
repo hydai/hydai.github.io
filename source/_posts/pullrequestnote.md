@@ -81,7 +81,7 @@ git rebase upstream/develop # 跟原開發者的 develop branch 做 rebase
 ```
 
 不使用 git merge 跟 upstream 同步，而是用 rebase 的方式，
-這樣可以保持整條 branch 的乾淨層度喔。
+這樣可以保持整條 branch 的乾淨程度喔。
 
 而到後來我自己很不喜歡看到 merge commit 這個點出現XD 
 畢竟有時候太多的 merge commit 實在會讓整個圖不太好看。
