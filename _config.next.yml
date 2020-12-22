@@ -8,7 +8,7 @@ cache:
   enable: true
 
 # Remove unnecessary files after hexo generate.
-minify: false
+minify: true
 
 # Define custom file paths.
 # Create your custom files in site directory `source/_data` and uncomment needed files below.
@@ -61,9 +61,9 @@ custom_logo: #/uploads/custom-logo.jpg
 # CC licenses are available in 39 languages, you can find the specific and correct abbreviation you need on https://creativecommons.org
 creative_commons:
   license: by-nc-sa
-  sidebar: false
-  post: false
-  language:
+  sidebar: true
+  post: true
+  language: deed.zh_TW
 
 
 # ---------------------------------------------------------------
@@ -568,7 +568,7 @@ comments:
 
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: hydai
   count: true
 
@@ -585,6 +585,15 @@ disqusjs:
   api:
   apikey: # Register new application from https://disqus.com/api/applications/
   shortname: # See: https://disqus.com/admin/settings/general/
+
+## Utteranc
+utteranc:
+  enable: true
+  repo: hydai/hydai.github.io
+  pathname: pathname
+  theme: github-light
+  cdn: https://utteranc.es/client.js
+  label: ✨💬✨Comment
 
 # Changyan
 changyan:
