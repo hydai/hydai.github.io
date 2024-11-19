@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -134,7 +134,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -180,6 +180,105 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hyd.ai/2024/11/19/url-shortener/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="hydai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/19/url-shortener/" class="post-title-link" itemprop="url">蓋一個簡單的縮網址服務</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+      
+
+      <time title="創建時間：2024-11-19 13:06:22 / 修改時間：13:51:22" itemprop="dateCreated datePublished" datetime="2024-11-19T13:06:22+08:00">2024-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前的縮網址服務我是使用 picsee 來做的，但在免費的方案中，並不支援 HTTPS，這個影響很大，如果在 URL 中存在 HTTPS 的話，轉址服務就會失效。</p>
+<p>P.S. 因為我很不滿意 picsee 就不放上連結了，此外，我也非常不建議大家使用。</p>
+<p>雖然有段時間可以使用 Cloudflare 的 Proxy 來讓他有 HTTPS 的樣子，可是某次更新後也失效了，而且我發現失效的時候是在演講前，因此當了盤子付了一千台幣買了一年的進階網址服務。</p>
+<p>早知道這麼麻煩，當初應該在不緊急的時候先搬遷到 <a target="_blank" rel="noopener" href="https://lihi.io/">lihi</a> 上面，畢竟都要付錢了，當然要找一家好一點的服務商。</p>
+<p>然而，過了一段時間，我發現我其實不需要這麼多功能，只是想要一個簡單的縮網址服務而已，我並不需要追蹤成效，也不需要網址的統計，因為我唯一需要的功能就只是讓我的聽眾可以用短一點的網址拿到投影片或者是其他的資料。<br>在這時意外看到了 <a target="_blank" rel="noopener" href="https://github.com/sitcon-tw/URL-Shortener">SITCON 的 URL-Shortener</a>，我發現這個服務就是我想要的。</p>
+<p>在功能上：</p>
+<ul>
+<li>可以自訂網址</li>
+<li>可以加上該網址的簡介</li>
+<li>可以放圖片</li>
+<li>全部都是 markdown 語法</li>
+<li>可以用 GitHub workflow 來自動部署</li>
+</ul>
+<p>因此我就以他的專案為基礎，自己做了一個<a target="_blank" rel="noopener" href="https://github.com/hydai/URL-Shortener">相似的縮網址服務</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/19/url-shortener/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -216,7 +315,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-11-19 11:00:10" itemprop="dateModified" datetime="2024-11-19T11:00:10+08:00">2024-11-19</time>
+      <time title="修改時間：2024-11-19 13:51:10" itemprop="dateModified" datetime="2024-11-19T13:51:10+08:00">2024-11-19</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,15 +338,14 @@
     
     <div class="post-body" itemprop="articleBody">
           <p>每次升級總會遇上一次的 xcrun error ，<br>為了不要每次都查資料，<br>來把它記錄一下吧！</p>
-<p>上次遇到好像是從 10.10 升級到 10.11 的時候，<br>同樣的這次從 10.11 升級到 10.12 也是遇到一樣的問題。</p>
-<p>每次升級完以後，xcode 跟要抓取的 lib 好像就會跑掉，<br>當我在跑 <code>brew update</code> 的時候就會噴出下面這種 error:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew update</span><br><span class="line">xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools),</span><br><span class="line">missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun)</span><br></pre></td></tr></table></figure>
-
-<p>要解決的方法很簡單，看到上面的關鍵字 <code>CommandLineTools</code>，<br>我們就把 xcode 的 CommandLineTools 裝上來就能解掉這個問題囉～</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
-
-<p>執行這行以後，他會問你要不要 <code>取得 xcode</code>，<br>如果你只是需要解掉這個問題，並沒有要使用 xcode 做開發的話，<br>直接選「安裝」即可，不安裝 xcode 的話，可以省下很多空間跟時間呢！</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/10/01/xcurn-error-after-upgrade-10-12/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
