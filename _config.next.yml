@@ -136,9 +136,9 @@ site_state: true
 social:
   GitHub: https://github.com/hydai || fab fa-github
   E-Mail: mailto:hydai@hyd.ai || fa fa-envelope
-  Twitter: https://twitter.com/hydai_tw || fab fa-twitter
+  Twitter: https://x.com/hydai_tw || fab fa-twitter
   FB Page: https://www.facebook.com/hungyingdai || fab fa-facebook
-  YouTube: https://www.youtube.com/channel/UCL96VcILiOIp4PAYIPzotoQ || fab fa-youtube
+  YouTube: https://www.youtube.com/@hydai || fab fa-youtube
 
 social_icons:
   enable: true
@@ -288,7 +288,6 @@ related_posts:
 post_edit:
   enable: false
   url: https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name/ # Link for view source
-  #url: https://github.com/user-name/repo-name/edit/branch-name/subdirectory-name/ # Link for fork & edit
 
 # Show previous post and next post in post footer if exists
 # Available values: left | right | false
@@ -344,7 +343,7 @@ codeblock:
   # All available themes: https://theme-next.js.org/highlight/
   theme:
     light: default
-    dark: tomorrow-night
+    dark: stackoverflow-dark
   prism:
     light: prism
     dark: prism-dark
@@ -637,26 +636,6 @@ gitalk:
   # If you want everyone visiting your site to see a uniform language, you can set a force language value
   # Available values: en | es-ES | fr | ru | zh-CN | zh-TW
   language:
-
-# Post widgets & FB/VK comments settings.
-# ---------------------------------------------------------------
-# Facebook SDK Support.
-# https://github.com/iissnan/hexo-theme-next/pull/410
-facebook_sdk:
-  enable:       false
-  app_id:       245025255866974
-  fb_admin:     100000331794104
-  like_button:  true
-  webmaster:    true
-
-# Facebook comments plugin
-# This plugin depends on Facebook SDK.
-# If facebook_sdk.enable is false, Facebook comments plugin is unavailable.
-facebook_comments_plugin:
-  enable:       false
-  num_of_posts: 10    # min posts num is 1
-  width:        100%  # default width is 550px
-  scheme:       light # default scheme is light (light or dark)
 
 # ---------------------------------------------------------------
 # Post Widgets & Content Sharing Services
