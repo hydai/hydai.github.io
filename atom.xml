@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>hydaiの空想世界</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://hyd.ai/"/>
+  <updated>2024-11-19T03:00:10.630Z</updated>
+  <id>https://hyd.ai/</id>
+  
+  <author>
+    <name>hydai</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ...</title>
+    <link href="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/"/>
+    <id>https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/</id>
+    <published>2016-10-01T12:21:30.000Z</published>
+    <updated>2024-11-19T03:00:10.630Z</updated>
+    
+    <content type="html"><![CDATA[<p>每次升級總會遇上一次的 xcrun error ，<br>為了不要每次都查資料，<br>來把它記錄一下吧！</p><p>上次遇到好像是從 10.10 升級到 10.11 的時候，<br>同樣的這次從 10.11 升級到 10.12 也是遇到一樣的問題。</p><p>每次升級完以後，xcode 跟要抓取的 lib 好像就會跑掉，<br>當我在跑 <code>brew update</code> 的時候就會噴出下面這種 error:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew update</span><br><span class="line">xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools),</span><br><span class="line">missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun)</span><br></pre></td></tr></table></figure><p>要解決的方法很簡單，看到上面的關鍵字 <code>CommandLineTools</code>，<br>我們就把 xcode 的 CommandLineTools 裝上來就能解掉這個問題囉～</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure><p>執行這行以後，他會問你要不要 <code>取得 xcode</code>，<br>如果你只是需要解掉這個問題，並沒有要使用 xcode 做開發的話，<br>直接選「安裝」即可，不安裝 xcode 的話，可以省下很多空間跟時間呢！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;每次升級總會遇上一次的 xcrun error ，&lt;br&gt;為了不要每次都查資料，&lt;br&gt;來把它記錄一下吧！&lt;/p&gt;
+&lt;p&gt;上次遇到好像是從 10.10 升級到 10.11 的時候，&lt;br&gt;同樣的這次從 10.11 升級到 10.12 也是遇到一樣的問題。&lt;/p&gt;
+&lt;p&gt;每次
+      
+    
+    </summary>
+    
+      <category term="Note" scheme="https://hyd.ai/categories/Note/"/>
+    
+    
+      <category term="MacOS" scheme="https://hyd.ai/tags/MacOS/"/>
+    
+      <category term="xcurn" scheme="https://hyd.ai/tags/xcurn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>發 Pull Request 該注意的事情</title>
+    <link href="https://hyd.ai/2016/08/03/pullrequestnote/"/>
+    <id>https://hyd.ai/2016/08/03/pullrequestnote/</id>
+    <published>2016-08-03T14:06:22.000Z</published>
+    <updated>2024-11-19T03:00:10.630Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>在漫長的程式旅途中，我們很容易就使用到 Free software(如 gcc) 以及<br>Open Source Project(如 Bootstrap) 。<br>身為用戶，我其實一直希望能為這些很棒的作品增加更多更棒的功能。</p><p>也許是身為工程師的浪漫吧，我很渴望能做出一款全世界都在用的軟體，<br>然後很自豪地說：「看呀，你在用的ＯＯＸＸ是我做的喔！」（燦笑）</p><p>而在這之前，我們可能更常碰到在使用 Open Source Project 的情況下遇到 Bug ，<br>或是想為其添加新功能。這時候，如果是在 GitHub 上頭，我們便會以 Pull Request<br>的方式把自己的修改發過去給 upstream 希望他們能把這樣的增進給 Merge 進去。</p><p>不過先別急著在改完就馬上送過去，不然可能很容易會被無視或是當成小白喔！</p><span id="more"></span><h2 id="1-至少要測試過才發-Pull-Request-過去喔"><a href="#1-至少要測試過才發-Pull-Request-過去喔" class="headerlink" title="1. 至少要測試過才發 Pull Request 過去喔"></a>1. 至少要測試過才發 Pull Request 過去喔</h2><p>千萬不要把沒有測試過的 Code 就直接發 Pull Request 塞過去，<br>這個一定會被巴死，而且人家會覺得你腦袋壞掉OTZ</p><p>現在很多的 Project 都會串上 CI 當你發送 Pull Request 過去時，<br>便會驅動 CI 進行測試，如果你的程式碼根本沒有通過測試，那麼 Project 的<br>maintainer 當然不會去幫你看囉。</p><p>也因此很容易就直接被忽略了。<br>而且這樣的行為可能會讓別人對你留下不是很好的印象喔！！</p><h2 id="2-符合人家的文化"><a href="#2-符合人家的文化" class="headerlink" title="2. 符合人家的文化"></a>2. 符合人家的文化</h2><p>正所謂家有家規、國有國法，當你想要為一個 Project 發送 Pull Request 的時候，<br>千萬要注意自己的 Coding Style 有沒有符合規範、命名的方式有沒有跟人家一致等等。</p><p>通常可以在人家的 Project 底下找到 CONTRIBUTING.md 或是 contributing guide ，<br>這裡面通常會記載很詳細的你要如何融入這個貢獻群的方式，<br>有些也會在這邊說明 Project 裡頭的 Coding Style 甚至是 Naming Style 喔！</p><p>如果沒有在 Project 中找到這些文化資訊的話，那麼就要利用自己 <em>敏銳</em> 的觀察力，<br>仔細的看一下該個 Project 裡面是怎麼樣的撰寫風格，然後盡量去符合 Code Owner 的<br>風格吧！</p><h2 id="3-要隨時跟想-merge-進去的-branch-保持同步"><a href="#3-要隨時跟想-merge-進去的-branch-保持同步" class="headerlink" title="3. 要隨時跟想 merge 進去的 branch 保持同步"></a>3. 要隨時跟想 merge 進去的 branch 保持同步</h2><p>比如說今天你在 fork 過來的 Project 從他的 <code>develop</code> branch 拉出來一條<br>叫做 <code>new_feature_A</code> 的 branch，準備為這個 Project 新增一個新功能 A。</p><p>在非常認真的撰寫程式碼後，你終於完成了這個新功能 A，並且想要把它貢獻回去原本的<br>Project 中，這時候你可能會想發一個 Pull Request(PR) 想把你的 <code>new_feature_A</code><br>branch merge 到原開發者的 <code>develop</code> 的 branch 上。</p><p>但是那條你原先拉出來的 <code>develop</code> branch 可能已經有了更多的 commit 或是<br>merge 了許多的 PR。<br>於是你的 branch 跟原開發者的 branch 就會發生 conflict，沒辦法被原開發者使用自動<br> merge，因為會被 conflict 的情況卡住。</p><p>當然這時候原開發者沒有義務幫你解決這個 conflict 的問題，如果你沒有自己處理好，<br>原開發者可能也會直接不理這個 PR 了。</p><p>因此隨時與自己想要貢獻回去的 branch 同步也是很重要的喔！</p><p>通常我個人的同步做法是這樣的：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch upstream</span><br><span class="line">git checkout new_feature_A <span class="comment"># 切到自己開發的那條 branch 上</span></span><br><span class="line">git rebase upstream/develop <span class="comment"># 跟原開發者的 develop branch 做 rebase</span></span><br></pre></td></tr></table></figure><p>不使用 git merge 跟 upstream 同步，而是用 rebase 的方式，<br>這樣可以保持整條 branch 的乾淨程度喔。</p><p>而到後來我自己很不喜歡看到 merge commit 這個點出現XD<br>畢竟有時候太多的 merge commit 實在會讓整個圖不太好看。</p><p>所以我自己會盡量少用 <code>git pull</code> 或是 <code>git merge</code> 這兩個指令的話，<br>而是改用 <code>git pull --rebase</code> 跟 <code>git rebase</code> 來取代喔！</p><h2 id="4-Squash-commits-的重要性"><a href="#4-Squash-commits-的重要性" class="headerlink" title="4. Squash commits 的重要性"></a>4. Squash commits 的重要性</h2><p>平常我們在開發的時候，很常進行 commit ，雖然只是要完成一件事情，<br>可是卻花了好幾個 commit 來完成這件事。最常見的是下面這個模樣：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">commit 1: Add feature meow</span><br><span class="line">commit 2: Fix typo</span><br><span class="line">commit 3: Fix missing OO</span><br><span class="line">commit 4: Fix bugs in feature meow</span><br><span class="line">...</span><br></pre></td></tr></table></figure><p>但是如果你要送上去的重點只有「Add feature meow」這件事情，我認為就應該只留下<br>表達出 「Add feature meow」 這件事的 commit log 就好，<br>這些細節(繁瑣)的過程留在 commit log 裡也沒有太大的好處。</p><p>這個時候我們就可以透過 <code>git rebase -i</code> 的方式來做 squash commits 讓我們的<br>commit log 變得更乾淨。</p><p>至於要怎麼使用 <code>git rebase</code> 來做 squash 呢？就留待之後的文章再來好好解釋啦！</p><p>P.S. 本文是以個人的經驗撰寫而成，<br>如果缺漏或需更正之處，歡迎各位提出更多的建議喔OuO。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0-前言&quot;&gt;&lt;a href=&quot;#0-前言&quot; class=&quot;headerlink&quot; title=&quot;0. 前言&quot;&gt;&lt;/a&gt;0. 前言&lt;/h2&gt;&lt;p&gt;在漫長的程式旅途中，我們很容易就使用到 Free software(如 gcc) 以及&lt;br&gt;Open Source Project(如 Bootstrap) 。&lt;br&gt;身為用戶，我其實一直希望能為這些很棒的作品增加更多更棒的功能。&lt;/p&gt;
+&lt;p&gt;也許是身為工程師的浪漫吧，我很渴望能做出一款全世界都在用的軟體，&lt;br&gt;然後很自豪地說：「看呀，你在用的ＯＯＸＸ是我做的喔！」（燦笑）&lt;/p&gt;
+&lt;p&gt;而在這之前，我們可能更常碰到在使用 Open Source Project 的情況下遇到 Bug ，&lt;br&gt;或是想為其添加新功能。這時候，如果是在 GitHub 上頭，我們便會以 Pull Request&lt;br&gt;的方式把自己的修改發過去給 upstream 希望他們能把這樣的增進給 Merge 進去。&lt;/p&gt;
+&lt;p&gt;不過先別急著在改完就馬上送過去，不然可能很容易會被無視或是當成小白喔！&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Note" scheme="https://hyd.ai/categories/Note/"/>
+    
+    
+      <category term="git" scheme="https://hyd.ai/tags/git/"/>
+    
+      <category term="Pull Request" scheme="https://hyd.ai/tags/Pull-Request/"/>
+    
+      <category term="PR" scheme="https://hyd.ai/tags/PR/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>發現新玩具，用 Hexo 來寫網誌吧！</title>
+    <link href="https://hyd.ai/2016/05/22/helloworld/"/>
+    <id>https://hyd.ai/2016/05/22/helloworld/</id>
+    <published>2016-05-22T08:21:11.000Z</published>
+    <updated>2024-11-19T03:00:10.630Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="準備更新網誌"><a href="#準備更新網誌" class="headerlink" title="準備更新網誌"></a>準備更新網誌</h1><p>長時間以來都是用 Google blogger 跟 logdown 兩個服務來寫網誌，<br>但是一個不吃 markdown 語法，只能用傳統的編輯，<br>另一個則是不是很穩，有時候會炸掉。</p><p>剛好發現這個工具 Hexo 可以用 markdown 來寫網誌，而且可以跟 GitHub Page 做結合，<br>那就來試用看看吧！</p><span id="more"></span><h1 id="一些渲染測試"><a href="#一些渲染測試" class="headerlink" title="一些渲染測試"></a>一些渲染測試</h1><h1 id="h1"><a href="#h1" class="headerlink" title="h1"></a>h1</h1><h2 id="h2"><a href="#h2" class="headerlink" title="h2"></a>h2</h2><h3 id="h3"><a href="#h3" class="headerlink" title="h3"></a>h3</h3><h4 id="h4"><a href="#h4" class="headerlink" title="h4"></a>h4</h4><p><strong>Bold</strong></p><p><em>Italy</em></p><p><strong><em>BI</em></strong></p><p><code>Pusheen</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># bash</span></span><br><span class="line">$ <span class="built_in">echo</span> “Meow”</span><br><span class="line">$ <span class="built_in">cd</span> ~</span><br></pre></td></tr></table></figure><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// cpp</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    std::cout &lt;&lt; “hello, world\n”;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> i = <span class="number">0</span>; i &lt; <span class="number">100</span>; i++) &#123;</span><br><span class="line">        std::cout &lt;&lt; i*<span class="number">100</span> &lt;&lt; std::endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># python</span></span><br><span class="line">a = <span class="number">100</span></span><br><span class="line">b = <span class="number">1000</span></span><br><span class="line"><span class="keyword">if</span> a &gt; <span class="number">100</span> <span class="keyword">and</span> b &lt; <span class="number">50</span>:</span><br><span class="line">    <span class="built_in">print</span> (“Yes”)</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;準備更新網誌&quot;&gt;&lt;a href=&quot;#準備更新網誌&quot; class=&quot;headerlink&quot; title=&quot;準備更新網誌&quot;&gt;&lt;/a&gt;準備更新網誌&lt;/h1&gt;&lt;p&gt;長時間以來都是用 Google blogger 跟 logdown 兩個服務來寫網誌，&lt;br&gt;但是一個不吃 markdown 語法，只能用傳統的編輯，&lt;br&gt;另一個則是不是很穩，有時候會炸掉。&lt;/p&gt;
+&lt;p&gt;剛好發現這個工具 Hexo 可以用 markdown 來寫網誌，而且可以跟 GitHub Page 做結合，&lt;br&gt;那就來試用看看吧！&lt;/p&gt;
+    
+    </summary>
+    
+    
+  </entry>
+  
+</feed>

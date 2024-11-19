@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 5.4.2">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/all.min.css" integrity="sha256-5eIC48iZUHmSlSUz9XtjRyK2mzQkHScZY1WdMaoz74E=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hyd.ai","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="0. 前言在漫長的程式旅途中，我們很容易就使用到 Free software(如 gcc) 以及Open Source Project(如 Bootstrap) 。身為用戶，我其實一直希望能為這些很棒的作品增加更多更棒的功能。 也許是身為工程師的浪漫吧，我很渴望能做出一款全世界都在用的軟體，然後很自豪地說：「看呀，你在用的ＯＯＸＸ是我做的喔！」（燦笑） 而在這之前，我們可能更常碰到在使用 Open">
+<meta property="og:type" content="article">
+<meta property="og:title" content="發 Pull Request 該注意的事情">
+<meta property="og:url" content="https://hyd.ai/2016/08/03/pullrequestnote/index.html">
+<meta property="og:site_name" content="hydaiの空想世界">
+<meta property="og:description" content="0. 前言在漫長的程式旅途中，我們很容易就使用到 Free software(如 gcc) 以及Open Source Project(如 Bootstrap) 。身為用戶，我其實一直希望能為這些很棒的作品增加更多更棒的功能。 也許是身為工程師的浪漫吧，我很渴望能做出一款全世界都在用的軟體，然後很自豪地說：「看呀，你在用的ＯＯＸＸ是我做的喔！」（燦笑） 而在這之前，我們可能更常碰到在使用 Open">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2016-08-03T14:06:22.000Z">
+<meta property="article:modified_time" content="2024-11-19T03:00:10.630Z">
+<meta property="article:author" content="hydai">
+<meta property="article:tag" content="git">
+<meta property="article:tag" content="Pull Request">
+<meta property="article:tag" content="PR">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hyd.ai/2016/08/03/pullrequestnote/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://hyd.ai/2016/08/03/pullrequestnote/","path":"2016/08/03/pullrequestnote/","title":"發 Pull Request 該注意的事情"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>發 Pull Request 該注意的事情 | hydaiの空想世界</title>
+  
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78643171-1"></script>
+  <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78643171-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
+  <script src="/js/third-party/analytics/google-analytics.js"></script>
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切換導航欄" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">hydaiの空想世界</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜尋" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首頁</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>標籤</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分類</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>歸檔</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目錄
+        </li>
+        <li class="sidebar-nav-overview">
+          本站概要
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E8%87%B3%E5%B0%91%E8%A6%81%E6%B8%AC%E8%A9%A6%E9%81%8E%E6%89%8D%E7%99%BC-Pull-Request-%E9%81%8E%E5%8E%BB%E5%96%94"><span class="nav-number">2.</span> <span class="nav-text">1. 至少要測試過才發 Pull Request 過去喔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%AC%A6%E5%90%88%E4%BA%BA%E5%AE%B6%E7%9A%84%E6%96%87%E5%8C%96"><span class="nav-number">3.</span> <span class="nav-text">2. 符合人家的文化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E8%A6%81%E9%9A%A8%E6%99%82%E8%B7%9F%E6%83%B3-merge-%E9%80%B2%E5%8E%BB%E7%9A%84-branch-%E4%BF%9D%E6%8C%81%E5%90%8C%E6%AD%A5"><span class="nav-number">4.</span> <span class="nav-text">3. 要隨時跟想 merge 進去的 branch 保持同步</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Squash-commits-%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="nav-number">5.</span> <span class="nav-text">4. Squash commits 的重要性</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="hydai"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">hydai</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分類</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">標籤</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hydai" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hydai" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:hydai@hyd.ai" title="E-Mail → mailto:hydai@hyd.ai" rel="noopener me"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://x.com/hydai_tw" title="Twitter → https:&#x2F;&#x2F;x.com&#x2F;hydai_tw" rel="noopener me" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/hungyingdai" title="FB Page → https:&#x2F;&#x2F;www.facebook.com&#x2F;hungyingdai" rel="noopener me" target="_blank"><i class="fab fa-facebook fa-fw"></i>FB Page</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.youtube.com/@hydai" title="YouTube → https:&#x2F;&#x2F;www.youtube.com&#x2F;@hydai" rel="noopener me" target="_blank"><i class="fab fa-youtube fa-fw"></i>YouTube</a>
+      </span>
+  </div>
+  <div class="cc-license animated" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" class="cc-opacity" rel="noopener" target="_blank"><img src="https://cdn.jsdelivr.net/npm/@creativecommons/vocabulary@2020.11.3/assets/license_badges/small/by_nc_sa.svg" alt="Creative Commons"></a>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
+    <link itemprop="mainEntityOfPage" href="https://hyd.ai/2016/08/03/pullrequestnote/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="hydai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="發 Pull Request 該注意的事情 | hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          發 Pull Request 該注意的事情
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2016-08-03 22:06:22" itemprop="dateCreated datePublished" datetime="2016-08-03T22:06:22+08:00">2016-08-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-11-19 11:00:10" itemprop="dateModified" datetime="2024-11-19T11:00:10+08:00">2024-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>在漫長的程式旅途中，我們很容易就使用到 Free software(如 gcc) 以及<br>Open Source Project(如 Bootstrap) 。<br>身為用戶，我其實一直希望能為這些很棒的作品增加更多更棒的功能。</p>
+<p>也許是身為工程師的浪漫吧，我很渴望能做出一款全世界都在用的軟體，<br>然後很自豪地說：「看呀，你在用的ＯＯＸＸ是我做的喔！」（燦笑）</p>
+<p>而在這之前，我們可能更常碰到在使用 Open Source Project 的情況下遇到 Bug ，<br>或是想為其添加新功能。這時候，如果是在 GitHub 上頭，我們便會以 Pull Request<br>的方式把自己的修改發過去給 upstream 希望他們能把這樣的增進給 Merge 進去。</p>
+<p>不過先別急著在改完就馬上送過去，不然可能很容易會被無視或是當成小白喔！</p>
+<span id="more"></span>
+
+<h2 id="1-至少要測試過才發-Pull-Request-過去喔"><a href="#1-至少要測試過才發-Pull-Request-過去喔" class="headerlink" title="1. 至少要測試過才發 Pull Request 過去喔"></a>1. 至少要測試過才發 Pull Request 過去喔</h2><p>千萬不要把沒有測試過的 Code 就直接發 Pull Request 塞過去，<br>這個一定會被巴死，而且人家會覺得你腦袋壞掉OTZ</p>
+<p>現在很多的 Project 都會串上 CI 當你發送 Pull Request 過去時，<br>便會驅動 CI 進行測試，如果你的程式碼根本沒有通過測試，那麼 Project 的<br>maintainer 當然不會去幫你看囉。</p>
+<p>也因此很容易就直接被忽略了。<br>而且這樣的行為可能會讓別人對你留下不是很好的印象喔！！</p>
+<h2 id="2-符合人家的文化"><a href="#2-符合人家的文化" class="headerlink" title="2. 符合人家的文化"></a>2. 符合人家的文化</h2><p>正所謂家有家規、國有國法，當你想要為一個 Project 發送 Pull Request 的時候，<br>千萬要注意自己的 Coding Style 有沒有符合規範、命名的方式有沒有跟人家一致等等。</p>
+<p>通常可以在人家的 Project 底下找到 CONTRIBUTING.md 或是 contributing guide ，<br>這裡面通常會記載很詳細的你要如何融入這個貢獻群的方式，<br>有些也會在這邊說明 Project 裡頭的 Coding Style 甚至是 Naming Style 喔！</p>
+<p>如果沒有在 Project 中找到這些文化資訊的話，那麼就要利用自己 <em>敏銳</em> 的觀察力，<br>仔細的看一下該個 Project 裡面是怎麼樣的撰寫風格，然後盡量去符合 Code Owner 的<br>風格吧！</p>
+<h2 id="3-要隨時跟想-merge-進去的-branch-保持同步"><a href="#3-要隨時跟想-merge-進去的-branch-保持同步" class="headerlink" title="3. 要隨時跟想 merge 進去的 branch 保持同步"></a>3. 要隨時跟想 merge 進去的 branch 保持同步</h2><p>比如說今天你在 fork 過來的 Project 從他的 <code>develop</code> branch 拉出來一條<br>叫做 <code>new_feature_A</code> 的 branch，準備為這個 Project 新增一個新功能 A。</p>
+<p>在非常認真的撰寫程式碼後，你終於完成了這個新功能 A，並且想要把它貢獻回去原本的<br>Project 中，這時候你可能會想發一個 Pull Request(PR) 想把你的 <code>new_feature_A</code><br>branch merge 到原開發者的 <code>develop</code> 的 branch 上。</p>
+<p>但是那條你原先拉出來的 <code>develop</code> branch 可能已經有了更多的 commit 或是<br>merge 了許多的 PR。<br>於是你的 branch 跟原開發者的 branch 就會發生 conflict，沒辦法被原開發者使用自動<br> merge，因為會被 conflict 的情況卡住。</p>
+<p>當然這時候原開發者沒有義務幫你解決這個 conflict 的問題，如果你沒有自己處理好，<br>原開發者可能也會直接不理這個 PR 了。</p>
+<p>因此隨時與自己想要貢獻回去的 branch 同步也是很重要的喔！</p>
+<p>通常我個人的同步做法是這樣的：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch upstream</span><br><span class="line">git checkout new_feature_A <span class="comment"># 切到自己開發的那條 branch 上</span></span><br><span class="line">git rebase upstream/develop <span class="comment"># 跟原開發者的 develop branch 做 rebase</span></span><br></pre></td></tr></table></figure>
+
+<p>不使用 git merge 跟 upstream 同步，而是用 rebase 的方式，<br>這樣可以保持整條 branch 的乾淨程度喔。</p>
+<p>而到後來我自己很不喜歡看到 merge commit 這個點出現XD<br>畢竟有時候太多的 merge commit 實在會讓整個圖不太好看。</p>
+<p>所以我自己會盡量少用 <code>git pull</code> 或是 <code>git merge</code> 這兩個指令的話，<br>而是改用 <code>git pull --rebase</code> 跟 <code>git rebase</code> 來取代喔！</p>
+<h2 id="4-Squash-commits-的重要性"><a href="#4-Squash-commits-的重要性" class="headerlink" title="4. Squash commits 的重要性"></a>4. Squash commits 的重要性</h2><p>平常我們在開發的時候，很常進行 commit ，雖然只是要完成一件事情，<br>可是卻花了好幾個 commit 來完成這件事。最常見的是下面這個模樣：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">commit 1: Add feature meow</span><br><span class="line">commit 2: Fix typo</span><br><span class="line">commit 3: Fix missing OO</span><br><span class="line">commit 4: Fix bugs in feature meow</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>但是如果你要送上去的重點只有「Add feature meow」這件事情，我認為就應該只留下<br>表達出 「Add feature meow」 這件事的 commit log 就好，<br>這些細節(繁瑣)的過程留在 commit log 裡也沒有太大的好處。</p>
+<p>這個時候我們就可以透過 <code>git rebase -i</code> 的方式來做 squash commits 讓我們的<br>commit log 變得更乾淨。</p>
+<p>至於要怎麼使用 <code>git rebase</code> 來做 squash 呢？就留待之後的文章再來好好解釋啦！</p>
+<p>P.S. 本文是以個人的經驗撰寫而成，<br>如果缺漏或需更正之處，歡迎各位提出更多的建議喔OuO。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>hydai
+  </li>
+  <li class="post-copyright-link">
+      <strong>文章連結：</strong>
+      <a href="https://hyd.ai/2016/08/03/pullrequestnote/" title="發 Pull Request 該注意的事情">https://hyd.ai/2016/08/03/pullrequestnote/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
+  </li>
+</ul>
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+              <a href="/tags/Pull-Request/" rel="tag"># Pull Request</a>
+              <a href="/tags/PR/" rel="tag"># PR</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/05/22/helloworld/" rel="prev" title="發現新玩具，用 Hexo 來寫網誌吧！">
+                  <i class="fa fa-angle-left"></i> 發現新玩具，用 Hexo 來寫網誌吧！
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2016/10/01/xcurn-error-after-upgrade-10-12/" rel="next" title="每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ...">
+                  每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ... <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    
+  
+  <div class="comments">
+  <script src="https://utteranc.es/client.js" repo="hydai/hydai.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script>
+  </div>
+  
+  
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2016 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">hydai</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 強力驅動
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="回到頂端">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/sidebar.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
