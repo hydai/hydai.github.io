@@ -19,28 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"hyd.ai","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.21.1","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"always","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜尋...","empty":"我們無法找到任何有關 ${query} 的搜索結果","hits_time":"找到 ${hits} 個搜索結果（用時 ${time} 毫秒）","hits":"找到 ${hits} 個搜索結果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="每次升級總會遇上一次的 xcrun error ，為了不要每次都查資料，來把它記錄一下吧！">
+    <meta name="description" content="前言macOS 的 Time Machine 是一個非常好用的備份工具，它曾經多次救援我人生的重要時刻。當時碩士論文寫到一半，macbook pro 直接壞掉，幸好有 Time Machine 的備份，讓我可以如期畢業。 但是隨著使用的容量越來越大，在備份的過程中，有時候會發現備份的速度變成異常緩慢，甚至出現要十幾個小時才能完成一次備份，尤其人在國外時深感危險。 在搜尋的時候發現其實世界上有一大堆">
 <meta property="og:type" content="article">
-<meta property="og:title" content="每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ...">
-<meta property="og:url" content="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/index.html">
+<meta property="og:title" content="加速 macOS 的 Time Machine 備份速度">
+<meta property="og:url" content="https://hyd.ai/2024/11/24/time-machine-speed-up/index.html">
 <meta property="og:site_name" content="hydaiの空想世界">
-<meta property="og:description" content="每次升級總會遇上一次的 xcrun error ，為了不要每次都查資料，來把它記錄一下吧！">
+<meta property="og:description" content="前言macOS 的 Time Machine 是一個非常好用的備份工具，它曾經多次救援我人生的重要時刻。當時碩士論文寫到一半，macbook pro 直接壞掉，幸好有 Time Machine 的備份，讓我可以如期畢業。 但是隨著使用的容量越來越大，在備份的過程中，有時候會發現備份的速度變成異常緩慢，甚至出現要十幾個小時才能完成一次備份，尤其人在國外時深感危險。 在搜尋的時候發現其實世界上有一大堆">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2016-10-01T12:21:30.000Z">
-<meta property="article:modified_time" content="2024-11-19T05:51:10.421Z">
+<meta property="article:published_time" content="2024-11-24T08:58:22.000Z">
+<meta property="article:modified_time" content="2024-11-24T09:20:13.427Z">
 <meta property="article:author" content="hydai">
-<meta property="article:tag" content="MacOS">
-<meta property="article:tag" content="xcurn">
+<meta property="article:tag" content="macOS">
+<meta property="article:tag" content="Time Machine">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/">
+<link rel="canonical" href="https://hyd.ai/2024/11/24/time-machine-speed-up/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/","path":"2016/10/01/xcurn-error-after-upgrade-10-12/","title":"每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ..."}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://hyd.ai/2024/11/24/time-machine-speed-up/","path":"2024/11/24/time-machine-speed-up/","title":"加速 macOS 的 Time Machine 備份速度"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ... | hydaiの空想世界</title>
+<title>加速 macOS 的 Time Machine 備份速度 | hydaiの空想世界</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78643171-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78643171-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -102,7 +102,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目錄
@@ -115,6 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%A7%A3%E6%B1%BA%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解決方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E4%BB%A4%E8%A7%A3%E9%87%8B"><span class="nav-number">2.1.</span> <span class="nav-text">指令解釋</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%81%A2%E5%BE%A9%E5%8E%9F%E4%BE%86%E7%9A%84%E8%A8%AD%E5%AE%9A"><span class="nav-number">3.</span> <span class="nav-text">恢復原來的設定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%96%B9%E4%BE%BF%E7%9A%84%E5%88%A5%E5%90%8D"><span class="nav-number">4.</span> <span class="nav-text">方便的別名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -190,7 +191,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-TW">
-    <link itemprop="mainEntityOfPage" href="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/">
+    <link itemprop="mainEntityOfPage" href="https://hyd.ai/2024/11/24/time-machine-speed-up/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -203,12 +204,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ... | hydaiの空想世界">
+      <meta itemprop="name" content="加速 macOS 的 Time Machine 備份速度 | hydaiの空想世界">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ...
+          加速 macOS 的 Time Machine 備份速度
         </h1>
 
         <div class="post-meta-container">
@@ -218,15 +219,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">發表於</span>
+      
 
-      <time title="創建時間：2016-10-01 20:21:30" itemprop="dateCreated datePublished" datetime="2016-10-01T20:21:30+08:00">2016-10-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新於</span>
-      <time title="修改時間：2024-11-19 13:51:10" itemprop="dateModified" datetime="2024-11-19T13:51:10+08:00">2024-11-19</time>
+      <time title="創建時間：2024-11-24 16:58:22 / 修改時間：17:20:13" itemprop="dateCreated datePublished" datetime="2024-11-24T16:58:22+08:00">2024-11-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -247,17 +242,31 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><p>每次升級總會遇上一次的 xcrun error ，<br>為了不要每次都查資料，<br>來把它記錄一下吧！</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>macOS 的 Time Machine 是一個非常好用的備份工具，它曾經多次救援我人生的重要時刻。當時碩士論文寫到一半，macbook pro 直接壞掉，幸好有 Time Machine 的備份，讓我可以如期畢業。</p>
+<p>但是隨著使用的容量越來越大，在備份的過程中，有時候會發現備份的速度變成異常緩慢，甚至出現要十幾個小時才能完成一次備份，尤其人在國外時深感危險。</p>
+<p>在搜尋的時候發現其實世界上有一大堆人也有相同的問題，幾乎都有標準做法了<code>(/ω＼)</code></p>
 <span id="more"></span>
 
-<p>上次遇到好像是從 10.10 升級到 10.11 的時候，<br>同樣的這次從 10.11 升級到 10.12 也是遇到一樣的問題。</p>
-<p>每次升級完以後，xcode 跟要抓取的 lib 好像就會跑掉，<br>當我在跑 <code>brew update</code> 的時候就會噴出下面這種 error:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ brew update</span><br><span class="line">xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools),</span><br><span class="line">missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun)</span><br></pre></td></tr></table></figure>
+<h2 id="解決方法"><a href="#解決方法" class="headerlink" title="解決方法"></a>解決方法</h2><p>與其他的備份方式不同，Time Machine 有個隱藏的參數會將備份的速度限制在一個較低的數值，且相關的優先順序也是在較低的位置，因此如果不改變這個數值的話，Time Machine 的備份速度就會隨著積累的增加而變得越來越慢。</p>
+<p>很遺憾的是，這個數值是隱藏的，因此我們需要透過終端機來修改這個數值。</p>
+<p>打開終端機以後，輸入以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sysctl debug.lowpri_throttle_enabled=0</span><br></pre></td></tr></table></figure>
 
-<p>要解決的方法很簡單，看到上面的關鍵字 <code>CommandLineTools</code>，<br>我們就把 xcode 的 CommandLineTools 裝上來就能解掉這個問題囉～</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure>
+<p>這樣一來，Time Machine 的備份速度就會恢復到正常的速度了。</p>
+<h3 id="指令解釋"><a href="#指令解釋" class="headerlink" title="指令解釋"></a>指令解釋</h3><p><code>sudo</code> 是因為我們需要透過 <code>sysctl</code> 進行系統參數的修改，而這個指令是需要 root 權限才能使用的。</p>
+<p><code>sysctl</code> 是一個在 Unix-like 的作業系統中專門用來讀取與修改內核參數的工具。</p>
+<p><code>debug.lowpri_throttle_enabled</code> 是一個參數，當這個參數為 1 時，Time Machine 的備份速度會被限制在一個較低的數值，當這個參數為 0 時，Time Machine 的備份速度就不再受到此限制。</p>
+<p><code>lowpri</code> 是 low priority 的縮寫，<code>throttle</code> 是節流閥的意思，表示限制流量，<code>enabled</code> 是啟用的意思，因此這個參數的意思就是啟用低優先順序的限制。</p>
+<h2 id="恢復原來的設定"><a href="#恢復原來的設定" class="headerlink" title="恢復原來的設定"></a>恢復原來的設定</h2><p>上面的修改會在重新開機後被重置，因此即使忘記恢復原本的設定也沒關係，時間會解決一切。</p>
+<p>若完成備份之後，還是想要馬上恢復成原本的設定，可以輸入以下指令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> sysctl debug.lowpri_throttle_enabled=1</span><br></pre></td></tr></table></figure>
 
-<p>執行這行以後，他會問你要不要 <code>取得 xcode</code>，<br>如果你只是需要解掉這個問題，並沒有要使用 xcode 做開發的話，<br>直接選「安裝」即可，不安裝 xcode 的話，可以省下很多空間跟時間呢！</p>
+<h2 id="方便的別名"><a href="#方便的別名" class="headerlink" title="方便的別名"></a>方便的別名</h2><p>每次都需要輸入這麼長的指令也是很麻煩的，因此可以使用 <code>alias</code> 來建立一個別名，這樣就能用短短的指令做到同樣的事囉。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 請在你的 .bashrc 或 .zshrc 中加入以下指令</span></span><br><span class="line"><span class="built_in">alias</span> tmspup=<span class="string">&#x27;sudo sysctl debug.lowpri_throttle_enabled=0&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> tmspdown=<span class="string">&#x27;sudo sysctl debug.lowpri_throttle_enabled=1&#x27;</span></span><br><span class="line"><span class="comment"># 日後就能使用 tmspup 與 tmspdown 來快速的切換 Time Machine 的備份速度了</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.howtogeek.com/843598/how-to-speed-up-your-time-machine-backups/">How to Speed Up Your Time Machine Backups</a></li>
+</ul>
 
     </div>
 
@@ -275,7 +284,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>文章連結：</strong>
-      <a href="https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/" title="每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ...">https://hyd.ai/2016/10/01/xcurn-error-after-upgrade-10-12/</a>
+      <a href="https://hyd.ai/2024/11/24/time-machine-speed-up/" title="加速 macOS 的 Time Machine 備份速度">https://hyd.ai/2024/11/24/time-machine-speed-up/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
@@ -284,22 +293,19 @@
 </div>
 
           <div class="post-tags">
-              <a href="/tags/MacOS/" rel="tag"># MacOS</a>
-              <a href="/tags/xcurn/" rel="tag"># xcurn</a>
+              <a href="/tags/macOS/" rel="tag"># macOS</a>
+              <a href="/tags/Time-Machine/" rel="tag"># Time Machine</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2016/08/03/pullrequestnote/" rel="prev" title="發 Pull Request 該注意的事情">
-                  <i class="fa fa-angle-left"></i> 發 Pull Request 該注意的事情
+                <a href="/2024/11/19/url-shortener/" rel="prev" title="蓋一個簡單的縮網址服務">
+                  <i class="fa fa-angle-left"></i> 蓋一個簡單的縮網址服務
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/11/19/url-shortener/" rel="next" title="蓋一個簡單的縮網址服務">
-                  蓋一個簡單的縮網址服務 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
