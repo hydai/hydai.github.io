@@ -139,6 +139,7 @@ social:
   Twitter: https://x.com/hydai_tw || fab fa-twitter
   FB Page: https://www.facebook.com/hungyingdai || fab fa-facebook
   YouTube: https://www.youtube.com/@hydai || fab fa-youtube
+  RSS: /atom.xml || fa fa-rss
 
 social_icons:
   enable: true
