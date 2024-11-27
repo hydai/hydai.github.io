@@ -36,7 +36,7 @@ scheme: Pisces
 #scheme: Gemini
 
 # Dark Mode
-darkmode: false
+darkmode: true
 
 
 # ---------------------------------------------------------------
@@ -591,7 +591,7 @@ utteranc:
   enable: true
   repo: hydai/hydai.github.io
   pathname: pathname
-  theme: github-light
+  theme: github-dark
   cdn: https://utteranc.es/client.js
   label: ✨💬✨Comment
 
@@ -811,7 +811,7 @@ mermaid:
 # Use Animate.css to animate everything.
 # For more information: https://animate.style
 motion:
-  enable: true
+  enable: false
   async: false
   transition:
     # All available transition variants: https://theme-next.js.org/animate/
