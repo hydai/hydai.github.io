@@ -124,7 +124,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">文章</span>
         </a>
       </div>
@@ -135,7 +135,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">18</span>
         <span class="site-state-item-name">標籤</span></a>
       </div>
   </nav>
@@ -175,6 +175,106 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hyd.ai/2024/12/12/deploy-flatcar-on-do/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="hydai">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | hydaiの空想世界">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/12/deploy-flatcar-on-do/" class="post-title-link" itemprop="url">在 DigitalOcean 上部署 Flatcar Container Linux + LLM</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">發表於</span>
+
+      <time title="創建時間：2024-12-12 22:31:17" itemprop="dateCreated datePublished" datetime="2024-12-12T22:31:17+08:00">2024-12-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新於</span>
+      <time title="修改時間：2024-12-13 00:25:28" itemprop="dateModified" datetime="2024-12-13T00:25:28+08:00">2024-12-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分類於</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Note/" itemprop="url" rel="index"><span itemprop="name">Note</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>之前在 Flatcar 的系統擴充元件提了<a target="_blank" rel="noopener" href="https://github.com/flatcar/sysext-bakery/pulls?q=is:pr+author:hydai+is:closed">兩個 PRs</a>，讓 <a target="_blank" rel="noopener" href="https://github.com/WasmEdge/WasmEdge/">WasmEdge</a> 與 <a target="_blank" rel="noopener" href="https://github.com/LlamaEdge/LlamaEdge">LlamaEdge</a> 能以 sysext 的方式在 Flatcar 被部署時，一起被安裝在裡頭。因為跟 DigitalOcean 發生了一些事，因此決定留下筆記以後，準備遷移到 Azure 或其他友善的平台。</p>
+<p>本文將涵蓋：</p>
+<ol>
+<li>如何建立屬於你的 Flatcar Sysext(系統擴充元件)。</li>
+<li>如何在 DigitalOcean 上新增 Flatcar Container Linux 的客製化映像檔案。</li>
+<li>如何在 DigitalOcean 上部署 Flatcar Container Linux。</li>
+<li>如何執行 Wasm 的應用程式(利益揭露，我是 WasmEdge 的維護者)。</li>
+<li>如何部署大語言模型(LLM)在 Flatcar Container Linux 上，使用 LlamaEdge 為例。(利益揭露，這個專案會編譯成 Wasm 格式，並執行在 WasmEdge 之上)。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/12/deploy-flatcar-on-do/#more" rel="contents">
+                閱讀全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
