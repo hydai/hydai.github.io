@@ -564,3 +564,40 @@ curl -X POST http://localhost:8080/v1/chat/completions \
 若對 LlamaEdge 有更多興趣，請直接到該專案的 GitHub 頁面查看更多資訊。
 
 謝謝大家的收看 :-)
+
+## 寫在最後
+
+謝謝朋友的關心，關於在 DigitalOcean 上發生的事情就是我想測試能不能也啟動 GPU 的 Droplet 來進行更有效能的 LLM 測試，可惜 DigitalOcean 拒絕了我。
+我根據官方頁面申請了 GPU Droplet 的限額，然後下面是他們的回信，因此在上面的工作都完成後，我已經移除所有在 DO 上面的 Droplet 與客製化映像檔。
+將來也不打算在上面部署其他的服務，因為很明顯地，DigitalOcean 不願服務我這種小客戶。Azure、GCP、AWS 都相對友善，就算是奈米客戶，也能獲得相關的資源。
+在此，我個人強烈建議可以使用其他的雲端服務廠商，而不是 DigitalOcean。
+
+以下為收到的原文，為避免該工作人員困擾，我將使用 XXX 取代人名：
+
+```
+Hello,
+
+Greetings from DigitalOcean!
+
+Thanks for reaching out, my name is XXX from DigitalOcean Support.
+
+After reviewing your account and your request, we are unable to approve access
+ to GPU Droplets at this time for your team.
+
+We would be happy to consider your request for a higher resource limit after
+ you have additional billing history on our platform.
+To provide additional context to what that means, invoices generate on the
+ first day of every month and are based on the services consumed in the prior
+ billing cycle. As invoices are generated and successfully paid using the
+ payment method on file for your team, this generates billing history which
+ is what we use to determine eligibility for resource limit increases.
+
+Should you have any questions or require further assistance regarding this
+ request, please do not hesitate to reach out to us.
+
+Warm Regards,
+
+XXX
+Associate Customer Advocate
+DigitalOcean Support
+```
