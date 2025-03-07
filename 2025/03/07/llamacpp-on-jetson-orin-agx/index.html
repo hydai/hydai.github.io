@@ -21,14 +21,14 @@
 
     <meta name="description" content="簡介由於工作的緣故，需要將 llama.cpp 作為 WASI-NN 的後端所使用，來讓 WebAssembly 能具備使用 AI 模型的能力，也因此需要在各種平台上編譯 llama.cpp 作為我們的相依性函式庫。而 NVIDIA Jetson Orin AGX 64GB 的版本，作為提供相對大的 VRAM 與支援 CUDA 的平台，自然是我們花許多力氣在上面進行測試與最佳化的目標。本文將詳">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp">
+<meta property="og:title" content="在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用">
 <meta property="og:url" content="https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/index.html">
 <meta property="og:site_name" content="hydaiの空想世界">
 <meta property="og:description" content="簡介由於工作的緣故，需要將 llama.cpp 作為 WASI-NN 的後端所使用，來讓 WebAssembly 能具備使用 AI 模型的能力，也因此需要在各種平台上編譯 llama.cpp 作為我們的相依性函式庫。而 NVIDIA Jetson Orin AGX 64GB 的版本，作為提供相對大的 VRAM 與支援 CUDA 的平台，自然是我們花許多力氣在上面進行測試與最佳化的目標。本文將詳">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/img.jpg">
 <meta property="article:published_time" content="2025-03-07T05:28:00.000Z">
-<meta property="article:modified_time" content="2025-03-07T07:25:36.547Z">
+<meta property="article:modified_time" content="2025-03-07T07:31:15.968Z">
 <meta property="article:author" content="hydai">
 <meta property="article:tag" content="Linux">
 <meta property="article:tag" content="LLM">
@@ -47,10 +47,10 @@
 <link rel="canonical" href="https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/","path":"2025/03/07/llamacpp-on-jetson-orin-agx/","title":"在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-TW","comments":true,"permalink":"https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/","path":"2025/03/07/llamacpp-on-jetson-orin-agx/","title":"在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp | hydaiの空想世界</title>
+<title>在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用 | hydaiの空想世界</title>
   
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-78643171-1"></script>
   <script class="next-config" data-name="google_analytics" type="application/json">{"tracking_id":"UA-78643171-1","only_pageview":false,"measure_protocol_api_secret":null}</script>
@@ -215,12 +215,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp | hydaiの空想世界">
+      <meta itemprop="name" content="在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用 | hydaiの空想世界">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp
+          在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用
         </h1>
 
         <div class="post-meta-container">
@@ -232,7 +232,7 @@
       <span class="post-meta-item-text">發表於</span>
       
 
-      <time title="創建時間：2025-03-07 13:28:00 / 修改時間：15:25:36" itemprop="dateCreated datePublished" datetime="2025-03-07T13:28:00+08:00">2025-03-07</time>
+      <time title="創建時間：2025-03-07 13:28:00 / 修改時間：15:31:15" itemprop="dateCreated datePublished" datetime="2025-03-07T13:28:00+08:00">2025-03-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -346,7 +346,7 @@
   </li>
   <li class="post-copyright-link">
       <strong>文章連結：</strong>
-      <a href="https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/" title="在 NVIDIA Jetson Orin AGX 上編譯與部署 llama.cpp">https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/</a>
+      <a href="https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/" title="在 NVIDIA Jetson Orin AGX 上編譯 llama.cpp 與部署 AI 應用">https://hyd.ai/2025/03/07/llamacpp-on-jetson-orin-agx/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版權聲明： </strong>本網誌所有文章除特別聲明外，均採用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh_TW" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 許可協議。轉載請註明出處！
