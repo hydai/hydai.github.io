@@ -337,7 +337,7 @@ load_tensors:   CPU_Mapped model buffer size =   281.81 MiB
 透過以下指令來啟動 llama-server：
 
 ```bash
-./build/bin/llama-cli -m ./ds-r1-distill-llama-8b/ds-r1-distill-llama-8B-Q4_0.gguf -ngl 33
+./build/bin/llama-server -m ./ds-r1-distill-llama-8b/ds-r1-distill-llama-8B-Q4_0.gguf -ngl 33
 ```
 
 原則上就是把上面的 `cli` 換成 `server` 就可以囉！
