@@ -7,16 +7,16 @@ const { compact = false } = Astro.props;
 ---
 
 <div class:list={['flex items-center', compact ? 'gap-4' : 'gap-6']}>
-  <!-- Avatar in diamond frame -->
+  <!-- Avatar -->
   <div class:list={[
-    'border-2 border-gold rotate-45 overflow-hidden shrink-0',
+    'rounded-full border-2 border-border overflow-hidden shrink-0',
     compact ? 'w-16 h-16' : 'w-24 h-24',
   ]}>
     <img
       src="/images/avatar.jpg"
       alt="hydai"
       class:list={[
-        '-rotate-45 scale-[1.414] object-cover',
+        'object-cover',
         compact ? 'w-16 h-16' : 'w-24 h-24',
       ]}
     />
@@ -24,7 +24,7 @@ const { compact = false } = Astro.props;
   <div>
     <h2
       class:list={[
-        'font-display uppercase tracking-widest text-gold',
+        'font-semibold text-text',
         compact ? 'text-lg' : 'text-xl',
       ]}
     >

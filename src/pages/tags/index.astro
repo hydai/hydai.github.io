@@ -16,23 +16,20 @@ const sortedTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
 
 <BaseLayout title="Tags">
   <div class="max-w-3xl mx-auto px-4 py-12">
-    <!-- Sunburst hero heading -->
-    <div class="sunburst py-8 text-center mb-8">
-      <h1 class="text-4xl md:text-6xl font-display text-gold uppercase tracking-widest">Tags</h1>
-    </div>
+    <h1 class="text-3xl md:text-4xl font-bold text-text mb-10">Tags</h1>
 
     <div class="flex flex-wrap gap-3">
       {
         sortedTags.map(([tag, count]) => (
           <a
             href={`/tags/${tag}/`}
-            class="group inline-flex items-center gap-2 px-4 py-2 font-body text-sm uppercase tracking-wider
-              border-2 border-gold text-gold
-              hover:bg-gold hover:text-obsidian hover:-translate-y-1
+            class="group inline-flex items-center gap-2 px-4 py-2 text-sm
+              rounded-full bg-elevated text-muted
+              hover:bg-accent/15 hover:text-accent hover:-translate-y-1
               transition-all"
           >
             <span>#{tag}</span>
-            <span class="text-xs px-2 py-0.5 bg-midnight border border-gold/50 group-hover:bg-obsidian group-hover:text-gold transition-colors">
+            <span class="text-xs px-2 py-0.5 rounded-full bg-surface text-dim group-hover:text-accent transition-colors">
               {count}
             </span>
           </a>
