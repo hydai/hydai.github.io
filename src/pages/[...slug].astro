@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from 'astro:content';
+import BlogPost from '../layouts/BlogPost.astro';
+import { getPostSlug } from '../lib/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+  const sorted = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+  return sorted.map((post, index) => {
+    const slug = getPostSlug(post);
+
+    const prevPost = index < sorted.length - 1 ? sorted[index + 1] : null;
+    const nextPost = index > 0 ? sorted[index - 1] : null;
+
+    return {
+      params: { slug },
+      props: {
+        post,
+        prevPost: prevPost
+          ? { slug: getPostSlug(prevPost), title: prevPost.data.title }
+          : null,
+        nextPost: nextPost
+          ? { slug: getPostSlug(nextPost), title: nextPost.data.title }
+          : null,
+      },
+    };
+  });
+}
+
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await render(post);
+
+// Estimate reading time (~400 chars per minute for mixed CJK/English content)
+const text = post.body || '';
+const readingTime = Math.max(1, Math.ceil(text.length / 400));
+---
+
+<BlogPost
+  title={post.data.title}
+  date={post.data.date}
+  updated={post.data.updated}
+  tags={post.data.tags}
+  categories={post.data.categories}
+  description={post.data.description}
+  image={post.data.image}
+  readingTime={readingTime}
+  prevPost={prevPost}
+  nextPost={nextPost}
+>
+  <Content />
+</BlogPost>

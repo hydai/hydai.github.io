@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import { getPostSlug } from '../lib/utils';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<BaseLayout title="Home">
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Recent posts -->
+    <section>
+      <h2 class="text-2xl font-bold mb-6 font-mono text-gray-900 dark:text-text-primary">
+        <span class="text-blue-600 dark:text-accent-cyan">$</span> Recent Posts
+      </h2>
+      <div class="space-y-4">
+        {
+          posts.map((post) => (
+            <PostCard
+              title={post.data.title}
+              date={post.data.date}
+              tags={post.data.tags}
+              description={post.data.description}
+              slug={getPostSlug(post)}
+            />
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

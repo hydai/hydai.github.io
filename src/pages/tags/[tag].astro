@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { getPostSlug } from '../../lib/utils';
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+
+  const tagSet = new Set<string>();
+  allPosts.forEach((post) => {
+    post.data.tags.forEach((tag) => tagSet.add(tag));
+  });
+
+  return [...tagSet].map((tag) => {
+    const filtered = allPosts
+      .filter((post) => post.data.tags.includes(tag))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+    return { params: { tag }, props: { posts: filtered, tag } };
+  });
+}
+
+const { posts, tag } = Astro.props;
+---
+
+<BaseLayout title={`Tag: ${tag}`}>
+  <div class="max-w-3xl mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold mb-2 font-mono text-gray-900 dark:text-text-primary">
+      <span class="text-blue-600 dark:text-accent-purple">#</span>{tag}
+    </h1>
+    <p class="text-sm text-gray-500 dark:text-text-secondary mb-8 font-mono">
+      {posts.length} post{posts.length > 1 ? 's' : ''}
+    </p>
+    <div class="space-y-4">
+      {
+        posts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            date={post.data.date}
+            tags={post.data.tags}
+            description={post.data.description}
+            slug={getPostSlug(post)}
+          />
+        ))
+      }
+    </div>
+    <div class="mt-8">
+      <a
+        href="/tags/"
+        class="text-sm font-mono text-blue-600 dark:text-accent-cyan hover:underline"
+      >
+        &larr; All tags
+      </a>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,175 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import TagList from '../components/TagList.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  updated?: Date;
+  tags?: string[];
+  categories?: string[];
+  description?: string;
+  image?: string;
+  readingTime?: number;
+  prevPost?: { slug: string; title: string };
+  nextPost?: { slug: string; title: string };
+}
+
+const {
+  title,
+  date,
+  updated,
+  tags = [],
+  categories = [],
+  description,
+  image,
+  readingTime,
+  prevPost,
+  nextPost,
+} = Astro.props;
+
+// Use UTC to avoid timezone-related date shifts
+const formattedDate = `${date.getUTCFullYear()} 年 ${date.getUTCMonth() + 1} 月 ${date.getUTCDate()} 日`;
+
+const formattedUpdated = updated
+  ? `${updated.getUTCFullYear()} 年 ${updated.getUTCMonth() + 1} 月 ${updated.getUTCDate()} 日`
+  : undefined;
+---
+
+<BaseLayout title={title} description={description} image={image}>
+  <article class="max-w-3xl mx-auto px-4 py-12">
+    <!-- Post header -->
+    <header class="mb-10">
+      <h1
+        class="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-text-primary leading-tight"
+      >
+        {title}
+      </h1>
+      <div class="flex flex-wrap items-center gap-3 text-sm font-mono text-gray-500 dark:text-text-secondary">
+        <time datetime={date.toISOString()}>
+          📅 {formattedDate}
+        </time>
+        {formattedUpdated && (
+          <span>· 更新於 {formattedUpdated}</span>
+        )}
+        {readingTime && (
+          <span>· {readingTime} min read</span>
+        )}
+      </div>
+      {tags.length > 0 && (
+        <div class="mt-4">
+          <TagList tags={tags} />
+        </div>
+      )}
+    </header>
+
+    <!-- Table of Contents -->
+    <nav id="toc" class="mb-10 p-4 rounded-xl border border-gray-200 dark:border-text-dim bg-gray-50 dark:bg-bg-surface">
+      <details open>
+        <summary class="cursor-pointer font-semibold text-gray-900 dark:text-text-primary font-mono text-sm">
+          📑 Table of Contents
+        </summary>
+        <div id="toc-content" class="mt-3 text-sm space-y-1"></div>
+      </details>
+    </nav>
+
+    <!-- Post content -->
+    <div
+      class="prose prose-lg max-w-none
+        prose-headings:font-semibold
+        prose-a:text-blue-600 dark:prose-a:text-accent-cyan prose-a:no-underline hover:prose-a:underline
+        prose-code:font-mono
+        prose-img:rounded-xl prose-img:mx-auto"
+    >
+      <slot />
+    </div>
+
+    <!-- Post navigation -->
+    <nav class="mt-16 pt-8 border-t border-gray-200 dark:border-text-dim grid grid-cols-1 md:grid-cols-2 gap-4">
+      {prevPost && (
+        <a
+          href={`/${prevPost.slug}/`}
+          class="group p-4 rounded-xl border border-gray-200 dark:border-text-dim hover:border-blue-500 dark:hover:border-accent-cyan transition-colors"
+        >
+          <span class="text-xs font-mono text-gray-500 dark:text-text-secondary">← Previous</span>
+          <p class="mt-1 font-medium text-gray-900 dark:text-text-primary group-hover:text-blue-600 dark:group-hover:text-accent-cyan transition-colors">
+            {prevPost.title}
+          </p>
+        </a>
+      )}
+      {nextPost && (
+        <a
+          href={`/${nextPost.slug}/`}
+          class="group p-4 rounded-xl border border-gray-200 dark:border-text-dim hover:border-blue-500 dark:hover:border-accent-cyan transition-colors md:text-right md:col-start-2"
+        >
+          <span class="text-xs font-mono text-gray-500 dark:text-text-secondary">Next →</span>
+          <p class="mt-1 font-medium text-gray-900 dark:text-text-primary group-hover:text-blue-600 dark:group-hover:text-accent-cyan transition-colors">
+            {nextPost.title}
+          </p>
+        </a>
+      )}
+    </nav>
+
+    <!-- Utterances comments -->
+    <section class="mt-12">
+      <h2 class="text-xl font-semibold mb-4 text-gray-900 dark:text-text-primary">Comments</h2>
+      <div id="utterances-container"></div>
+      <script is:inline>
+        (function () {
+          const theme = document.documentElement.classList.contains('dark')
+            ? 'github-dark'
+            : 'github-light';
+          const script = document.createElement('script');
+          script.src = 'https://utteranc.es/client.js';
+          script.setAttribute('repo', 'hydai/hydai.github.io');
+          script.setAttribute('issue-term', 'pathname');
+          script.setAttribute('theme', theme);
+          script.setAttribute('crossorigin', 'anonymous');
+          script.async = true;
+          document.getElementById('utterances-container').appendChild(script);
+        })();
+      </script>
+    </section>
+  </article>
+
+  <!-- TOC generation script -->
+  <script is:inline>
+    (function () {
+      const article = document.querySelector('article .prose');
+      const tocContent = document.getElementById('toc-content');
+      if (!article || !tocContent) return;
+
+      const headings = article.querySelectorAll('h2, h3');
+      if (headings.length === 0) {
+        document.getElementById('toc')?.remove();
+        return;
+      }
+
+      const list = document.createElement('ul');
+      list.className = 'list-none pl-0 space-y-1';
+
+      headings.forEach(function (heading) {
+        if (!heading.id) {
+          heading.id = heading.textContent
+            .trim()
+            .toLowerCase()
+            .replace(/[^\w\u4e00-\u9fff]+/g, '-')
+            .replace(/^-|-$/g, '');
+        }
+        const li = document.createElement('li');
+        const a = document.createElement('a');
+        a.href = '#' + heading.id;
+        a.textContent = heading.textContent;
+        a.className =
+          'hover:text-blue-600 dark:hover:text-accent-cyan transition-colors no-underline';
+        if (heading.tagName === 'H3') {
+          li.className = 'pl-4';
+        }
+        li.appendChild(a);
+        list.appendChild(li);
+      });
+
+      tocContent.appendChild(list);
+    })();
+  </script>
+</BaseLayout>

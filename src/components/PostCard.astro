@@ -1,0 +1,40 @@
+---
+import TagList from './TagList.astro';
+
+interface Props {
+  title: string;
+  date: Date;
+  tags?: string[];
+  description?: string;
+  slug: string;
+}
+
+const { title, date, tags = [], description, slug } = Astro.props;
+
+const formattedDate = `${date.getUTCFullYear()} 年 ${date.getUTCMonth() + 1} 月 ${date.getUTCDate()} 日`;
+---
+
+<article
+  class="card-glow group p-6 rounded-xl border border-gray-200 dark:border-text-dim/50 bg-white dark:bg-bg-surface transition-all hover:bg-gray-50 dark:hover:bg-bg-elevated"
+>
+  <a href={`/${slug}/`} class="block">
+    <h2
+      class="text-xl font-semibold text-gray-900 dark:text-text-primary group-hover:text-blue-600 dark:group-hover:text-accent-cyan transition-colors leading-snug"
+    >
+      {title}
+    </h2>
+  </a>
+  <div class="mt-2 flex items-center gap-2 text-sm font-mono text-gray-500 dark:text-text-secondary">
+    <time datetime={date.toISOString()}>{formattedDate}</time>
+  </div>
+  {tags.length > 0 && (
+    <div class="mt-3">
+      <TagList tags={tags} small />
+    </div>
+  )}
+  {description && (
+    <p class="mt-3 text-sm text-gray-600 dark:text-text-secondary leading-relaxed line-clamp-2">
+      {description}
+    </p>
+  )}
+</article>

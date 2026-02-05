@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-bg: #0a0a0f;
+  --color-bg-surface: #12121a;
+  --color-bg-elevated: #1a1a28;
+
+  --color-accent-cyan: #00f5d4;
+  --color-accent-purple: #b388ff;
+  --color-accent-pink: #ff6b9d;
+  --color-accent-yellow: #ffd93d;
+
+  --color-text-primary: #e8e8e8;
+  --color-text-secondary: #9ca3af;
+  --color-text-dim: #4a4a5a;
+
+  --color-light-bg: #fafafa;
+  --color-light-surface: #ffffff;
+  --color-light-text: #1a1a2e;
+  --color-light-muted: #6b7280;
+
+  --font-sans: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dark body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+}
+
+/* Typography prose overrides for dark mode */
+.dark .prose {
+  --tw-prose-body: var(--color-text-primary);
+  --tw-prose-headings: var(--color-text-primary);
+  --tw-prose-links: var(--color-accent-cyan);
+  --tw-prose-bold: var(--color-text-primary);
+  --tw-prose-code: var(--color-accent-purple);
+  --tw-prose-quotes: var(--color-text-secondary);
+  --tw-prose-quote-borders: var(--color-text-dim);
+  --tw-prose-counters: var(--color-text-secondary);
+  --tw-prose-bullets: var(--color-text-dim);
+  --tw-prose-hr: var(--color-text-dim);
+  --tw-prose-th-borders: var(--color-text-dim);
+  --tw-prose-td-borders: var(--color-text-dim);
+}
+
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  text-decoration: none;
+  transition: color 0.2s, text-shadow 0.2s;
+}
+
+.dark .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  text-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+}
+
+/* Code block styling */
+.prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  border-radius: 0.75rem;
+  border: 1px solid var(--color-text-dim);
+}
+
+.dark .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: var(--color-bg-surface) !important;
+  border-color: var(--color-text-dim);
+}
+
+.dark .prose :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: var(--color-bg-elevated);
+  padding: 0.125rem 0.375rem;
+  border-radius: 0.25rem;
+}
+
+/* Glow effects */
+.glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+}
+
+.glow-hover:hover {
+  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+}
+
+/* Card hover effect */
+.card-glow {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.dark .card-glow:hover {
+  box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
+  border-color: rgba(0, 245, 212, 0.3);
+}
+
+/* Glassmorphism header */
+.glass {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Terminal cursor blink */
+.cursor-blink::after {
+  content: "▌";
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Pagefind search customization */
+.dark :root {
+  --pagefind-ui-scale: 1;
+  --pagefind-ui-primary: var(--color-accent-cyan);
+  --pagefind-ui-text: var(--color-text-primary);
+  --pagefind-ui-background: var(--color-bg-surface);
+  --pagefind-ui-border: var(--color-text-dim);
+  --pagefind-ui-tag: var(--color-bg-elevated);
+}
+
+/* Scrollbar styling */
+.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+.dark ::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: var(--color-text-dim);
+  border-radius: 4px;
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* Image in posts */
+.prose img {
+  border-radius: 0.75rem;
+  margin-left: auto;
+  margin-right: auto;
+}
