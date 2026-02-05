@@ -15,16 +15,16 @@ const formattedDate = `${date.getUTCFullYear()} å¹´ ${date.getUTCMonth() + 1} æœ
 ---
 
 <article
-  class="card-glow group p-6 rounded-xl border border-gray-200 dark:border-text-dim/50 bg-white dark:bg-bg-surface transition-all hover:bg-gray-50 dark:hover:bg-bg-elevated"
+  class="deco-card deco-corners group p-6 transition-all hover:-translate-y-2 hover:shadow-[0_8px_32px_rgba(212,175,55,0.15)]"
 >
   <a href={`/${slug}/`} class="block">
     <h2
-      class="text-xl font-semibold text-gray-900 dark:text-text-primary group-hover:text-blue-600 dark:group-hover:text-accent-cyan transition-colors leading-snug"
+      class="text-xl font-display uppercase tracking-widest text-champagne group-hover:text-gold transition-colors leading-snug"
     >
       {title}
     </h2>
   </a>
-  <div class="mt-2 flex items-center gap-2 text-sm font-mono text-gray-500 dark:text-text-secondary">
+  <div class="mt-2 flex items-center gap-2 text-sm font-body uppercase tracking-wide text-pewter">
     <time datetime={date.toISOString()}>{formattedDate}</time>
   </div>
   {tags.length > 0 && (
@@ -33,7 +33,7 @@ const formattedDate = `${date.getUTCFullYear()} å¹´ ${date.getUTCMonth() + 1} æœ
     </div>
   )}
   {description && (
-    <p class="mt-3 text-sm text-gray-600 dark:text-text-secondary leading-relaxed line-clamp-2">
+    <p class="mt-3 text-sm text-pewter leading-relaxed line-clamp-2">
       {description}
     </p>
   )}

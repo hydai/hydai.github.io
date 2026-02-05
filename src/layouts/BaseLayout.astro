@@ -21,7 +21,7 @@ const siteName = 'hydaiの空想世界';
 ---
 
 <!doctype html>
-<html lang="zh-TW" class="dark">
+<html lang="zh-TW">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,35 +46,20 @@ const siteName = 'hydaiの空想世界';
     <meta name="twitter:image" content={new URL(image, Astro.site)} />
 
     <!-- Theme color -->
-    <meta name="theme-color" content="#0a0a0f" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a0a" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Marcellus&family=Josefin+Sans:wght@300;400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
-
-    <!-- Dark mode init (prevent flash) -->
-    <script is:inline>
-      (function () {
-        const stored = localStorage.getItem('theme');
-        if (stored === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else if (stored === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else if (!window.matchMedia('(prefers-color-scheme: dark)').matches) {
-          document.documentElement.classList.remove('dark');
-        }
-      })();
-    </script>
 
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="alternate" type="application/rss+xml" title={siteName} href="/rss.xml" />
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-screen flex flex-col crosshatch-bg">
     <Header />
     <main class="flex-1">
       <slot />

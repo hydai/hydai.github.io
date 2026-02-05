@@ -1,29 +1,16 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where(.dark, .dark *));
-
 @theme {
-  --color-bg: #0a0a0f;
-  --color-bg-surface: #12121a;
-  --color-bg-elevated: #1a1a28;
+  --color-obsidian: #0a0a0a;
+  --color-charcoal: #141414;
+  --color-champagne: #f2f0e4;
+  --color-gold: #d4af37;
+  --color-midnight: #1e3d59;
+  --color-pewter: #888888;
 
-  --color-accent-cyan: #00f5d4;
-  --color-accent-purple: #b388ff;
-  --color-accent-pink: #ff6b9d;
-  --color-accent-yellow: #ffd93d;
-
-  --color-text-primary: #e8e8e8;
-  --color-text-secondary: #9ca3af;
-  --color-text-dim: #4a4a5a;
-
-  --color-light-bg: #fafafa;
-  --color-light-surface: #ffffff;
-  --color-light-text: #1a1a2e;
-  --color-light-muted: #6b7280;
-
-  --font-sans: "Inter", "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Marcellus", Georgia, serif;
+  --font-body: "Josefin Sans", "Noto Sans TC", sans-serif;
 }
 
 /* Base styles */
@@ -32,123 +19,208 @@ html {
 }
 
 body {
-  font-family: var(--font-sans);
-  background-color: var(--color-light-bg);
-  color: var(--color-light-text);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-body);
+  background-color: var(--color-obsidian);
+  color: var(--color-champagne);
 }
 
-.dark body {
-  background-color: var(--color-bg);
-  color: var(--color-text-primary);
+/* Crosshatch background overlay */
+.crosshatch-bg::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(212, 175, 55, 0.03) 10px,
+      rgba(212, 175, 55, 0.03) 11px
+    ),
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(212, 175, 55, 0.03) 10px,
+      rgba(212, 175, 55, 0.03) 11px
+    );
 }
 
-/* Typography prose overrides for dark mode */
-.dark .prose {
-  --tw-prose-body: var(--color-text-primary);
-  --tw-prose-headings: var(--color-text-primary);
-  --tw-prose-links: var(--color-accent-cyan);
-  --tw-prose-bold: var(--color-text-primary);
-  --tw-prose-code: var(--color-accent-purple);
-  --tw-prose-quotes: var(--color-text-secondary);
-  --tw-prose-quote-borders: var(--color-text-dim);
-  --tw-prose-counters: var(--color-text-secondary);
-  --tw-prose-bullets: var(--color-text-dim);
-  --tw-prose-hr: var(--color-text-dim);
-  --tw-prose-th-borders: var(--color-text-dim);
-  --tw-prose-td-borders: var(--color-text-dim);
+/* Art Deco card with gold border and lift hover */
+.deco-card {
+  background-color: var(--color-charcoal);
+  border: 1px solid var(--color-gold);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deco-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(212, 175, 55, 0.15);
+}
+
+/* L-shaped bracket corner decorations */
+.deco-corners {
+  position: relative;
+}
+
+.deco-corners::before,
+.deco-corners::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-gold);
+}
+
+.deco-corners::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+}
+
+.deco-corners::after {
+  bottom: -2px;
+  right: -2px;
+  border-left: none;
+  border-top: none;
+}
+
+/* Diamond (45° rotated) containers */
+.diamond {
+  transform: rotate(45deg);
+  overflow: hidden;
+}
+
+.diamond-inner {
+  transform: rotate(-45deg) scale(1.414);
+}
+
+/* Art Deco divider with center diamond */
+.deco-divider {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.deco-divider::before,
+.deco-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+}
+
+.deco-divider span {
+  color: var(--color-gold);
+  font-size: 0.75rem;
+  padding: 0 0.75rem;
+}
+
+/* Sunburst radial gradient */
+.sunburst {
+  background: radial-gradient(
+    ellipse at center,
+    rgba(212, 175, 55, 0.15) 0%,
+    transparent 70%
+  );
+}
+
+/* Typography prose overrides */
+.prose {
+  --tw-prose-body: var(--color-champagne);
+  --tw-prose-headings: var(--color-gold);
+  --tw-prose-links: var(--color-gold);
+  --tw-prose-bold: var(--color-champagne);
+  --tw-prose-code: var(--color-gold);
+  --tw-prose-quotes: var(--color-pewter);
+  --tw-prose-quote-borders: var(--color-gold);
+  --tw-prose-counters: var(--color-pewter);
+  --tw-prose-bullets: var(--color-gold);
+  --tw-prose-hr: rgba(212, 175, 55, 0.3);
+  --tw-prose-th-borders: rgba(212, 175, 55, 0.3);
+  --tw-prose-td-borders: rgba(212, 175, 55, 0.2);
 }
 
 .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   text-decoration: none;
   transition: color 0.2s, text-shadow 0.2s;
+  text-underline-offset: 4px;
 }
 
-.dark .prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
-  text-shadow: 0 0 8px rgba(0, 245, 212, 0.5);
+.prose :where(a):not(:where([class~="not-prose"], [class~="not-prose"] *)):hover {
+  text-decoration: underline;
+  text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
 }
 
 /* Code block styling */
 .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  border-radius: 0.75rem;
-  border: 1px solid var(--color-text-dim);
+  border-radius: 0;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  background-color: var(--color-charcoal) !important;
 }
 
-.dark .prose :where(pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
-  background-color: var(--color-bg-surface) !important;
-  border-color: var(--color-text-dim);
-}
-
-.dark .prose :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)) {
-  background-color: var(--color-bg-elevated);
+.prose :where(code):not(:where(pre *, [class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: rgba(212, 175, 55, 0.1);
   padding: 0.125rem 0.375rem;
-  border-radius: 0.25rem;
+  border-radius: 0;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 
-/* Glow effects */
-.glow-cyan {
-  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+/* Blockquote styling */
+.prose :where(blockquote):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  border-left-color: var(--color-gold);
+  border-left-width: 3px;
 }
 
-.glow-hover:hover {
-  text-shadow: 0 0 10px rgba(0, 245, 212, 0.6);
+/* Image styling — double frame */
+.prose img {
+  border-radius: 0;
+  margin-left: auto;
+  margin-right: auto;
+  border: 2px solid var(--color-gold);
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 2px;
 }
 
-/* Card hover effect */
-.card-glow {
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+/* Table styling */
+.prose :where(table):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  border-collapse: collapse;
 }
 
-.dark .card-glow:hover {
-  box-shadow: 0 0 20px rgba(0, 245, 212, 0.1);
-  border-color: rgba(0, 245, 212, 0.3);
-}
-
-/* Glassmorphism header */
-.glass {
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-/* Terminal cursor blink */
-.cursor-blink::after {
-  content: "▌";
-  animation: blink 1s step-end infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.prose :where(th):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: var(--color-gold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-family: var(--font-display);
 }
 
 /* Pagefind search customization */
-.dark :root {
+:root {
   --pagefind-ui-scale: 1;
-  --pagefind-ui-primary: var(--color-accent-cyan);
-  --pagefind-ui-text: var(--color-text-primary);
-  --pagefind-ui-background: var(--color-bg-surface);
-  --pagefind-ui-border: var(--color-text-dim);
-  --pagefind-ui-tag: var(--color-bg-elevated);
+  --pagefind-ui-primary: var(--color-gold);
+  --pagefind-ui-text: var(--color-champagne);
+  --pagefind-ui-background: var(--color-charcoal);
+  --pagefind-ui-border: rgba(212, 175, 55, 0.3);
+  --pagefind-ui-tag: rgba(212, 175, 55, 0.1);
+  --pagefind-ui-border-width: 1px;
+  --pagefind-ui-border-radius: 0;
 }
 
 /* Scrollbar styling */
-.dark ::-webkit-scrollbar {
+::-webkit-scrollbar {
   width: 8px;
 }
-.dark ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
 }
-.dark ::-webkit-scrollbar-thumb {
-  background: var(--color-text-dim);
-  border-radius: 4px;
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold);
+  border-radius: 0;
 }
-.dark ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
-}
-
-/* Image in posts */
-.prose img {
-  border-radius: 0.75rem;
-  margin-left: auto;
-  margin-right: auto;
+::-webkit-scrollbar-thumb:hover {
+  background: #e5c04b;
 }

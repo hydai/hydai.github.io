@@ -13,9 +13,7 @@ const { tags, small = false } = Astro.props;
       <a
         href={`/tags/${tag}/`}
         class:list={[
-          'inline-block rounded-full font-mono transition-colors',
-          'bg-purple-100 text-purple-700 hover:bg-purple-200',
-          'dark:bg-accent-purple/10 dark:text-accent-purple dark:hover:bg-accent-purple/20',
+          'inline-block font-body uppercase tracking-wider border border-gold/50 text-gold transition-colors hover:bg-gold hover:text-obsidian',
           small ? 'px-2 py-0.5 text-xs' : 'px-3 py-1 text-sm',
         ]}
       >

@@ -9,13 +9,27 @@ const posts = allPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueO
 ---
 
 <BaseLayout title="Home">
-  <div class="max-w-3xl mx-auto px-4 py-12">
+  <div class="max-w-3xl mx-auto px-4 py-16">
+    <!-- Hero section -->
+    <section class="sunburst py-12 text-center mb-16">
+      <h1 class="text-5xl md:text-7xl font-display text-gold uppercase tracking-widest mb-4">
+        hydaiの空想世界
+      </h1>
+      <p class="text-pewter font-body uppercase tracking-wider text-sm">
+        Open Source Developer &middot; AI/LLM &middot; WebAssembly &middot; Systems Programming
+      </p>
+      <div class="deco-divider mt-8">
+        <span>&#9670;</span>
+      </div>
+    </section>
+
     <!-- Recent posts -->
     <section>
-      <h2 class="text-2xl font-bold mb-6 font-mono text-gray-900 dark:text-text-primary">
-        <span class="text-blue-600 dark:text-accent-cyan">$</span> Recent Posts
+      <h2 class="text-2xl font-display uppercase tracking-widest text-gold mb-8 flex items-center gap-3">
+        <span class="inline-block w-2 h-2 bg-gold rotate-45"></span>
+        Recent Posts
       </h2>
-      <div class="space-y-4">
+      <div class="space-y-6">
         {
           posts.map((post) => (
             <PostCard
