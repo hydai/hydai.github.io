@@ -2,7 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PostCard from '../../components/PostCard.astro';
-import { getPostSlug } from '../../lib/utils';
+import { getPostSlug, tagSlug } from '../../lib/utils';
 
 export async function getStaticPaths() {
   const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
     const filtered = allPosts
       .filter((post) => post.data.tags.includes(tag))
       .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-    return { params: { tag }, props: { posts: filtered, tag } };
+    return { params: { tag: tagSlug(tag) }, props: { posts: filtered, tag } };
   });
 }
 

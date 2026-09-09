@@ -1,4 +1,6 @@
 ---
+import { tagSlug } from '../lib/utils';
+
 interface Props {
   tags: string[];
   small?: boolean;
@@ -11,7 +13,7 @@ const { tags, small = false } = Astro.props;
   {
     tags.map((tag) => (
       <a
-        href={`/tags/${tag}/`}
+        href={`/tags/${tagSlug(tag)}/`}
         class:list={[
           'inline-block rounded-full bg-elevated text-muted transition-colors hover:bg-accent/15 hover:text-accent',
           small ? 'px-2.5 py-0.5 text-xs' : 'px-3 py-1 text-sm',

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { tagSlug } from '../../lib/utils';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const allPosts = await getCollection('blog', ({ data }) => !data.draft);
@@ -25,7 +26,7 @@ const sortedTags = [...tagCounts.entries()].sort(
       {
         sortedTags.map(([tag, count]) => (
           <a
-            href={`/tags/${tag}/`}
+            href={`/tags/${tagSlug(tag)}/`}
             class="group inline-flex items-center gap-2 px-4 py-2 text-sm
               rounded-full bg-elevated text-muted
               hover:bg-accent/15 hover:text-accent hover:-translate-y-1

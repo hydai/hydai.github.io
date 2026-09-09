@@ -10,3 +10,11 @@ export function getPostSlug(post: { id: string; data: { date: Date } }): string 
   const slug = post.id.replace(/\/index$/, '').replace(/\//g, '-');
   return `${y}/${m}/${d}/${slug}`;
 }
+
+/**
+ * URL slug for a tag: whitespace becomes hyphens, matching the URLs Hexo generated
+ * (e.g. "PC Build" -> /tags/PC-Build/).
+ */
+export function tagSlug(tag: string): string {
+  return tag.trim().replace(/\s+/g, '-');
+}
