@@ -11,7 +11,10 @@ allPosts.forEach((post) => {
   });
 });
 
-const sortedTags = [...tagCounts.entries()].sort((a, b) => b[1] - a[1]);
+// Sort by count, then by name so the order does not depend on file load order
+const sortedTags = [...tagCounts.entries()].sort(
+  (a, b) => b[1] - a[1] || a[0].localeCompare(b[0], 'en'),
+);
 ---
 
 <BaseLayout title="Tags">
