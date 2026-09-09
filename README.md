@@ -1,43 +1,45 @@
-# Astro Starter Kit: Minimal
+# hydaiの空想世界
+
+[hyd.ai](https://hyd.ai) 的原始碼。使用 [Astro](https://astro.build) 產生靜態網站，搭配 Tailwind CSS v4、MDX、Pagefind 站內搜尋與 utterances 留言。
+
+## 分支
+
+| 分支 | 用途 |
+|---|---|
+| `astro` | 網站原始碼，也是部署來源。push 之後 GitHub Actions 會自動 build 並部署到 GitHub Pages。 |
+| `hexo`、`master` | 2025 年以前的 Hexo 原始碼與產出物，只保留歷史，不再更新。 |
+
+## 本機開發
+
+需要 Node.js 22.12 以上。
 
 ```sh
-npm create astro@latest -- --template minimal
+npm ci
+npm run dev       # 開發伺服器 http://localhost:4321
+npm run build     # 產出靜態檔到 dist/
+npm run preview   # 預覽 dist/ 的內容
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 寫文章
 
-## 🚀 Project Structure
+文章放在 `src/content/blog/`。純文字用單一檔案 `slug.md`；有圖片時建立資料夾 `slug/index.md`，圖片放在同一個資料夾內以相對路徑引用。網址為 `/YYYY/MM/DD/slug/`，日期取自 frontmatter，slug 取自檔名並轉為小寫。
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```yaml
+---
+title: 文章標題
+date: 2026-09-09 14:30:00
+tags: [AI, Claude]
+categories: [Note]
+description: 一句話摘要        # 選填，用於 SEO 與 RSS
+image: /images/cover.png     # 選填，社群分享預覽圖，檔案放在 public/images/
+draft: true                  # 選填，true 時不會出現在網站與 RSS
+---
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## 部署
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```sh
+git push origin astro
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+流程定義在 `.github/workflows/deploy.yml`，大約一分鐘後上線。RSS 位於 `/rss.xml`，`/atom.xml` 提供同一份內容給舊訂閱者。
