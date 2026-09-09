@@ -2,7 +2,7 @@
 title: 每次升級 mac os 總會遇到的 xcrun error invalid active developer path, missing xcurn at ... 
 date: 2016-10-01 20:21:30
 tags:
-- MacOS
+- macOS
 - xcurn
 categories:
 - Note
