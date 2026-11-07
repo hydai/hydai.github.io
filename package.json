@@ -17,5 +17,10 @@
     "astro": "^7.4.7",
     "astro-pagefind": "^2.0.1",
     "tailwindcss": "^4.1.18"
+  },
+  "overrides": {
+    "@tailwindcss/typography": {
+      "postcss-selector-parser": "6.1.5"
+    }
   }
 }
